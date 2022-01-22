@@ -4,13 +4,16 @@ import { StyleSheet, View, TextInput, Button } from 'react-native';
 const InputField = props => {
 
     const [enteredActivity, setEnteredActivity] = useState('')
-    const[hours, setHours] = useState('00')
-    const[mins, setMins] = useState('00')
+    const[hours, setHours] = useState('')
+    const[mins, setMins] = useState('')
 
 
     const buttonPressed = () => {
         const values = [enteredActivity, hours, mins]
         props.onClick(values)
+        setEnteredActivity('')
+        setHours('')
+        setMins('')
     }
 
     return(
@@ -25,14 +28,14 @@ const InputField = props => {
                 placeholder='Hr' 
                 style = {styles.hourContainer}
                 onChangeText={(enteredText) => setHours(enteredText)}
+                value = {hours}
 
             />
             <TextInput 
                 placeholder='Mn'
                 style = {styles.hourContainer}
                 onChangeText={(enteredText) => setMins(enteredText)}
-
-            
+                value= {mins}
             />
             <Button 
                 title = "Add"

@@ -1,4 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
+
+import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import InputField from './Components/InputField';
 import Banner from './Components/Banner';
@@ -6,8 +7,12 @@ import TimersList from './Components/TimersList';
 
 export default function App() {
 
-  const onSubmitNewActivity = (Uservalues) => {
-    const values = UserValues
+  const[timersList, setTimersList] = useState([])
+
+  const onSubmitNewActivity = (userValues) => {
+    //console.log(userValues)
+    setTimersList(timersList => [...timersList, userValues])
+
   }
 
   return (
@@ -18,9 +23,9 @@ export default function App() {
     <View style={styles.container}>
       
         <InputField onClick = {onSubmitNewActivity}/>
-      
+       
     </View>
-        <TimersList valueArray = {userValues}/>
+        <TimersList list = {timersList} />
     </View>
   );
 }
