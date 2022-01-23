@@ -14,13 +14,13 @@ const TimersList = props => {
         
         <View style={styles.container}>
                 {props.list.map((item, key) => 
-                <View style = {styles.listItem} key = {item[0]}>
+                <View style = {styles.listItem} key = {item.key}>
                     <Text style = {styles.item}>{item[0]}</Text>
                     <CountDown 
                         until ={((Number.parseInt(item[1],10)*60)+Number.parseInt(item[2],10))*60}
                         onFinish={() => alert('finished')}
                         size={15}
-                        digitStyle={{backgroundColor:'#E6E6EE',borderWidth:3,borderColor:'black'}}
+                        digitStyle={{backgroundColor:'#BBBBBB',borderWidth:2,borderColor:'black'}}
                         timeToShow={['H','M','S']}
                         timeLabels={{h:'hr',m:'mn',s:'sc'}}
                         separatorStyle={{color:'green'}}
