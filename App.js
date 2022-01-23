@@ -10,9 +10,18 @@ import TimersList from './Components/TimersList';
 export default function App() {
 
   const[timersList, setTimersList] = useState([])
+  const[timersJson, setTimersJson]=useState([])
 
   const onSubmitNewActivity = (userValues) => {
     //console.log(userValues)
+      setTimersJson(timersJson =>  [...timersJson, {
+        title: userValues[0],
+        hours: userValues[1],
+        mins: userValues[2],
+        key: userValues[0],
+        running: false
+      }])
+     
     setTimersList(timersList => [...timersList, userValues])
 
   }
@@ -29,7 +38,7 @@ export default function App() {
         <InputField onClick = {onSubmitNewActivity}/>
        
       </View>
-        <TimersList list = {timersList} />
+        <TimersList list = {timersList} json = {timersJson} />
 
      
     </View>

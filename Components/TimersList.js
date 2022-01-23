@@ -2,36 +2,45 @@ import React, {useState} from 'react';
 import { StyleSheet, View, Text, Button, FlatList } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 
-// const[timers, setTimers] = useState([])
-
-// // const addTimerHandler = (newTimer) =>{
-// //     setTimers(timers => [...timers, newTimer])
-// // }
 
 const TimersList = props => {
     const [isRunning, setIsRunning] = useState(false)
     return(
         
         <View style={styles.container}>
-                {props.list.map((item, key) => 
-                <View style = {styles.listItem} key = {item.key}>
-                    <Text style = {styles.item}>{item[0]}</Text>
-                    <CountDown 
-                        until ={((Number.parseInt(item[1],10)*60)+Number.parseInt(item[2],10))*60}
-                        onFinish={() => alert('finished')}
-                        size={15}
-                        digitStyle={{backgroundColor:'#BBBBBB',borderWidth:2,borderColor:'black'}}
-                        timeToShow={['H','M','S']}
-                        timeLabels={{h:'hr',m:'mn',s:'sc'}}
-                        separatorStyle={{color:'green'}}
-                        showSeparator
-                        running = {isRunning}
-                    />
-                    <Button title = "start"
-                            onPress={()=>{setIsRunning(true)}}/>
-                    <Button title = "stop"
-                            onPress={()=>{setIsRunning(false)}} />
-                </View>
+                {props.json.map((item) =>{
+                    
+                    //console.log(props.json)
+                    return(
+                      <View key ={item.key} style = {styles.listItem}  >
+                        <Text style = {styles.item}>{item.title}</Text>
+                        <CountDown 
+                            until ={((Number.parseInt(item.hours,10)*60)+Number.parseInt(item.mins,10))*60}
+                            onFinish={() => alert('finished')}
+                            size={15}
+                            digitStyle={{backgroundColor:'#BBBBBB',borderWidth:2,borderColor:'black'}}
+                            timeToShow={['H','M','S']}
+                            timeLabels={{h:'hr',m:'mn',s:'sc'}}
+                            separatorStyle={{color:'green'}}
+                            showSeparator
+                            running = {item.running}
+                        />
+                        <Button title = "start"
+                                onPress={()=>{
+                                //setIsRunning(true) 
+                                item.running = true
+                                console.log(item.running)
+                            }}/>
+                        <Button title = "stop"
+                                onPress={()=>{
+                                    //setIsRunning(false)
+                                    console.log(item.running)
+                                    item.running = false
+                                    }} />
+                    </View>
+                    )
+                } 
+                
                 )}
         </View>
     )
