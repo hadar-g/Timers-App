@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, TextInput, Button } from 'react-native';
+import { StyleSheet, View, TextInput, Button, Keyboard } from 'react-native';
 
 const InputField = props => {
 
@@ -14,18 +14,21 @@ const InputField = props => {
         setEnteredActivity('')
         setHours('')
         setMins('')
+        Keyboard.dismiss()
     }
 
     return(
         <View style = {styles.inputContainer}>
             <TextInput 
                 placeholder = "Activity"
+                autoComplete='off'
                 style = {styles.inputField}
                 onChangeText = {(enteredText) => setEnteredActivity(enteredText)}
                 value = {enteredActivity}
             />
             <TextInput
                 placeholder='Hr' 
+                keyboardType='number-pad'
                 style = {styles.hourContainer}
                 onChangeText={(enteredText) => setHours(enteredText)}
                 value = {hours}
@@ -33,6 +36,7 @@ const InputField = props => {
             />
             <TextInput 
                 placeholder='Mn'
+                keyboardType='number-pad'
                 style = {styles.hourContainer}
                 onChangeText={(enteredText) => setMins(enteredText)}
                 value= {mins}

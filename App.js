@@ -1,9 +1,11 @@
 
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import InputField from './Components/InputField';
 import Banner from './Components/Banner';
 import TimersList from './Components/TimersList';
+
+
 
 export default function App() {
 
@@ -16,17 +18,22 @@ export default function App() {
   }
 
   return (
+  <TouchableWithoutFeedback onPress = {Keyboard.dismiss}>
   <View>
-    <View style = {styles.banner}>
-        <Banner />
-    </View>
-    <View style={styles.container}>
+      <View style = {styles.banner}>
+          <Banner />
+      </View>
+
+      <View style={styles.container}>
       
         <InputField onClick = {onSubmitNewActivity}/>
        
-    </View>
+      </View>
         <TimersList list = {timersList} />
+
+     
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 

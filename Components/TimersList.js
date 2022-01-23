@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, Text, Button, FlatList } from 'react-native';
+import CountDown from 'react-native-countdown-component';
 
 // const[timers, setTimers] = useState([])
 
@@ -8,16 +9,28 @@ import { StyleSheet, View, Text, Button, FlatList } from 'react-native';
 // // }
 
 const TimersList = props => {
-    console.log(props.list)
+    const [isRunning, setIsRunning] = useState(false)
     return(
         
         <View style={styles.container}>
                 {props.list.map((item, key) => 
-                <View style = {styles.listItem}>
+                <View style = {styles.listItem} key = {item[0]}>
                     <Text style = {styles.item}>{item[0]}</Text>
-                    <Text style = {styles.item}>{item[1]}:{item[2]}</Text>
-                    <Button title = "start"/>
-                    <Button title = "stop" />
+                    <CountDown 
+                        until ={((Number.parseInt(item[1],10)*60)+Number.parseInt(item[2],10))*60}
+                        onFinish={() => alert('finished')}
+                        size={15}
+                        digitStyle={{backgroundColor:'#E6E6EE',borderWidth:3,borderColor:'black'}}
+                        timeToShow={['H','M','S']}
+                        timeLabels={{h:'hr',m:'mn',s:'sc'}}
+                        separatorStyle={{color:'green'}}
+                        showSeparator
+                        running = {isRunning}
+                    />
+                    <Button title = "start"
+                            onPress={()=>{setIsRunning(true)}}/>
+                    <Button title = "stop"
+                            onPress={()=>{setIsRunning(false)}} />
                 </View>
                 )}
         </View>
@@ -37,6 +50,8 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderRadius: 5,
         padding: 10,
+        margin: 10,
+        backgroundColor: '#E6E6E3'
     },
     item:{
         fontSize: 20,
